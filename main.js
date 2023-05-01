@@ -23,41 +23,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);
         const climate = urlParams.get('climate');
 
-        // A function to get random national parks based on climate.
         (async () => {
-            if (window.location.pathname.includes('results.html')) {
-                const urlParams = new URLSearchParams(window.location.search);
-                const climate = urlParams.get('climate');
-        
-                const selectedPark = await getRandomNationalPark(climate);
-        
-                if (selectedPark) {
-                    const npImage = document.getElementById('np-image');
-                    const npDescription = document.getElementById('np-description');
-        
-                    npImage.src = selectedPark.image;
-                    npImage.alt = selectedPark.name;
-                    npDescription.textContent = selectedPark.description;
-                }
+            const selectedPark = await getRandomNationalPark(climate);
+
+            if (selectedPark) {
+                const npImage = document.getElementById('np-image');
+                const npDescription = document.getElementById('np-description');
+
+                npImage.src = selectedPark.image;
+                npImage.alt = selectedPark.name;
+                npDescription.textContent = selectedPark.description;
             }
         })();
-        
-
-            const filteredParks = nationalParks.filter(np => np.climate === climate);
-            const randomIndex = Math.floor(Math.random() * filteredParks.length);
-            return filteredParks[randomIndex];
-        }
-
-        const selectedPark = getRandomNationalPark(climate);
-
-        if (selectedPark) {
-            const npImage = document.getElementById('np-image');
-            const npDescription = document.getElementById('np-description');
-
-            npImage.src = selectedPark.image;
-            npImage.alt = selectedPark.name;
-            npDescription.textContent = selectedPark.description;
-        }
     }
 });
 
