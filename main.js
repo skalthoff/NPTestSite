@@ -37,10 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
         })();
     }
 });
+
 async function fetchWikipediaPage(title) {
-    const proxyUrl = 'https://wikipedia-cors-proxy.skalthoff.workers.dev/';
-    const apiUrl = `https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&prop=extracts|pageimages&exintro&explaintext&pithumbsize=300&titles=${encodeURIComponent(title)}`;
-    const url = proxyUrl + encodeURIComponent(apiUrl);
+    const url = `https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&prop=extracts|pageimages&exintro&explaintext&pithumbsize=300&titles=${encodeURIComponent(title)}`;
 
     const response = await fetch(url);
     const data = await response.json();
@@ -53,7 +52,6 @@ async function fetchWikipediaPage(title) {
         image: pageInfo.thumbnail ? pageInfo.thumbnail.source : null
     };
 }
-
 
 async function getRandomNationalPark(climate) {
     // List of national park titles on Wikipedia based on climate.
